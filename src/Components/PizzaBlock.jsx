@@ -1,28 +1,45 @@
 import {useState} from "react";
 
 const PizzaBlock = (props) => {
-    const {title, price} = props;
+    const {id, title, price, imageUrl, types, sizes, category, rating} = props.pizzaData;
+
+    /*"id": 0,
+        "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/f035c7f46c0844069722f2bb3ee9f113_584x584.jpeg",
+        "title": "Пепперони Фреш с перцем",
+        "types": [0, 1],
+        "sizes": [26, 30, 40],
+        "price": 803,
+        "category": 0,
+        "rating": 4*/
 
     const [pizzaCount, setPizzaCount] = useState(0);
-
+    const [activeIndexSize, setActiveIndexSize] = useState(0);
+    const [activeIndexType, setActiveIndexType] = useState(0);
+    const pizzaTypes = ['тонкое', 'традиционное'];
     return (
         <div className="pizza-block-wrapper">
             <div className="pizza-block">
                 <a href="/pizza/7">
                     <img className="pizza-block__image"
-                         src="https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/d48003cd-902c-420d-9f28-92d9dc5f73b4.jpg"
+                         src={imageUrl}
                          alt="Pizza"/>
                     <h4 className="pizza-block__title">{title}</h4>
                 </a>
                 <div className="pizza-block__selector">
                     <ul>
-                        <li className="active">тонкое</li>
-                        <li className="">традиционное</li>
+                        {types.map((typeIndex, i) => {
+                            return <li key={i} onClick={() => setActiveIndexType(i)} className={activeIndexType === i ? "active" : ""}>{pizzaTypes[typeIndex]}</li>
+                        })}
+                        {/*<li className="active">тонкое</li>
+                        <li className="">традиционное</li>*/}
                     </ul>
                     <ul>
-                        <li className="active">26 см.</li>
+                        {sizes.map((size, i) => {
+                            return <li key={i} onClick={() => setActiveIndexSize(i)} className={activeIndexSize === i ? "active" : ""}>{size} см.</li>
+                        })}
+                        {/*<li className="active">26 см.</li>
                         <li className="">30 см.</li>
-                        <li className="">40 см.</li>
+                        <li className="">40 см.</li>*/}
                     </ul>
                 </div>
                 <div className="pizza-block__bottom">

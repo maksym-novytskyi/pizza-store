@@ -4,8 +4,11 @@ import Categories from "./Components/Categories";
 import Sort from "./Components/Sort";
 import PizzaBlock from "./Components/PizzaBlock";
 
+import pizzas from './assets/pizzas.json'
 
 function App() {
+    console.log(pizzas);
+
     return (<div id="root">
             <div className="wrapper">
                 <Header/>
@@ -17,7 +20,9 @@ function App() {
                         </div>
                         <h2 className="content__title">Все пиццы</h2>
                         <div className="content__items">
-                        <PizzaBlock/>
+                            {pizzas.map((p, i) => {
+                                return <PizzaBlock key={i} pizzaData={p}/>
+                            })}
                         </div>
                         <ul className="Pagination_root__uwB0O">
                             <li className="previous disabled">
