@@ -1,16 +1,7 @@
 import {useState} from "react";
 
 const PizzaBlock = (props) => {
-    const {id, title, price, imageUrl, types, sizes, category, rating} = props.pizzaData;
-
-    /*"id": 0,
-        "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/f035c7f46c0844069722f2bb3ee9f113_584x584.jpeg",
-        "title": "Пепперони Фреш с перцем",
-        "types": [0, 1],
-        "sizes": [26, 30, 40],
-        "price": 803,
-        "category": 0,
-        "rating": 4*/
+    const {title, price, imageUrl, types, sizes} = props.pizzaData;
 
     const [pizzaCount, setPizzaCount] = useState(0);
     const [activeIndexSize, setActiveIndexSize] = useState(0);
@@ -30,16 +21,11 @@ const PizzaBlock = (props) => {
                         {types.map((typeIndex, i) => {
                             return <li key={i} onClick={() => setActiveIndexType(i)} className={activeIndexType === i ? "active" : ""}>{pizzaTypes[typeIndex]}</li>
                         })}
-                        {/*<li className="active">тонкое</li>
-                        <li className="">традиционное</li>*/}
                     </ul>
                     <ul>
                         {sizes.map((size, i) => {
                             return <li key={i} onClick={() => setActiveIndexSize(i)} className={activeIndexSize === i ? "active" : ""}>{size} см.</li>
                         })}
-                        {/*<li className="active">26 см.</li>
-                        <li className="">30 см.</li>
-                        <li className="">40 см.</li>*/}
                     </ul>
                 </div>
                 <div className="pizza-block__bottom">
