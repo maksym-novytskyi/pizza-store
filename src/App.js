@@ -5,10 +5,23 @@ import Sort from "./Components/Sort";
 import PizzaBlock from "./Components/PizzaBlock";
 
 import pizzas from './assets/pizzas.json'
+import {useEffect, useState} from "react";
 
 function App() {
-    console.log(pizzas);
+    const [items, setItems] = useState([]);
 
+    useEffect(() => {
+        fetch('https://631242feb466aa9b03875d19.mockapi.io/items')
+            .then((res) => {
+                return res.json();
+            })
+            .then((json) => {
+                console.log(json);
+                setItems(json);
+            })
+    }, [])
+
+    console.log(items);
     return (<div id="root">
             <div className="wrapper">
                 <Header/>
