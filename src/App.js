@@ -2,13 +2,14 @@ import './scss/app.scss'
 import Header from "./Components/Header";
 import Categories from "./Components/Categories";
 import Sort from "./Components/Sort";
-import PizzaBlock from "./Components/PizzaBlock";
+import PizzaBlock from "./Components/PizzaBlock/PizzaBlock";
 
-import pizzas from './assets/pizzas.json'
 import {useEffect, useState} from "react";
+import Skeleton from "./Components/PizzaBlock/Skeleton";
 
 function App() {
     const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('https://631242feb466aa9b03875d19.mockapi.io/items')
@@ -18,10 +19,10 @@ function App() {
             .then((json) => {
                 console.log(json);
                 setItems(json);
+                setIsLoading(false)
             })
     }, [])
 
-    console.log(items);
     return (<div id="root">
             <div className="wrapper">
                 <Header/>
@@ -33,9 +34,10 @@ function App() {
                         </div>
                         <h2 className="content__title">Все пиццы</h2>
                         <div className="content__items">
-                            {pizzas.map((p, i) => {
-                                return <PizzaBlock key={i} pizzaData={p}/>
-                            })}
+                            {isLoading
+                                ? [...new Array(6)].map((_, i) => <Skeleton key={i}/>)
+                                : items.map((p, i) => <PizzaBlock key={i} pizzaData={p}/>)
+                            }
                         </div>
                         <ul className="Pagination_root__uwB0O">
                             <li className="previous disabled">
